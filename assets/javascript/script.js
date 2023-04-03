@@ -5,18 +5,40 @@ var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
 
-var question1 = {q:"q1", answerLine1:"1", answerLine2:"2",answerLine3:"3", answerLine4:"4"}
-var question2 = {q:"q2", answerLine1:"yes", answerLine2:"2",answerLine3:"3", answerLine4:"4"}
-var question3 = {q:"q3", answerLine1:"1", answerLine2:"2",answerLine3:"3", answerLine4:"q4"}
+var question1 = {
+    q:"which is a color?",
+    answerLine1:{name: "blue", status:"correct"},
+    answerLine2:{name: "a", status:"incorrect"},
+    answerLine3:{name: "3", status:"incorrect"},
+    answerLine4:{name: "apple", status:"incorrect"},
+}
+
+var question2 = {
+    q:"which is a fruit?",
+    answerLine1:{name: "blue", status:"incorrect"},
+    answerLine2:{name: "a", status:"incorrect"},
+    answerLine3:{name: "3", status:"incorrect"},
+    answerLine4:{name: "apple", status:"correct"},
+}
+
+var question3 = {
+    q:"which is a letter?",
+     answerLine1:{name: "blue", status:"incorrect"},
+      answerLine2:{name: "a", status:"correct"},
+      answerLine3:{name: "3", status:"incorrect"},
+       answerLine4:{name: "apple", status:"incorrect"},
+}
+
 var qs =[question1,question2,question3] 
 var questionCount = 0
+var element
 var runQuestions = function(){
     
     qHead.textContent= qs[questionCount].q;
-    a1.textContent= qs[questionCount].answerLine1;
-    a2.textContent= qs[questionCount].answerLine2;
-    a3.textContent= qs[questionCount].answerLine3;
-    a4.textContent= qs[questionCount].answerLine4;
+    a1.textContent= qs[questionCount].answerLine1.name;
+    a2.textContent= qs[questionCount].answerLine2.name;
+    a3.textContent= qs[questionCount].answerLine3.name;
+    a4.textContent= qs[questionCount].answerLine4.name;
     questionCount++
     console.log(questionCount)
 }
@@ -28,7 +50,7 @@ var runQuestions = function(){
 
 
 quizEvent.addEventListener("click", function(event) {
-    var element = event.target;
+    element = event.target;
     if (element.matches(".answer")) {
         var status = element.getAttribute("data-status")
         if (status==="correct"){
