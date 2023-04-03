@@ -32,13 +32,26 @@ var question3 = {
 var qs =[question1,question2,question3] 
 var questionCount = 0
 var element
+
 var runQuestions = function(){
     
     qHead.textContent= qs[questionCount].q;
     a1.textContent= qs[questionCount].answerLine1.name;
+    if(qs[questionCount].answerLine1.status == "correct"){
+        a1.setAttribute("data-status", "correct")
+    }
     a2.textContent= qs[questionCount].answerLine2.name;
+    if(qs[questionCount].answerLine2.status == "correct"){
+        a2.setAttribute("data-status", "correct")
+    }
     a3.textContent= qs[questionCount].answerLine3.name;
+    if(qs[questionCount].answerLine3.status == "correct"){
+        a3.setAttribute("data-status", "correct")
+    }
     a4.textContent= qs[questionCount].answerLine4.name;
+    if(qs[questionCount].answerLine4.status == "correct"){
+        a4.setAttribute("data-status", "correct")
+    }
     questionCount++
     console.log(questionCount)
 }
@@ -55,6 +68,7 @@ quizEvent.addEventListener("click", function(event) {
         var status = element.getAttribute("data-status")
         if (status==="correct"){
             console.log("cor")
+            element.setAttribute("data-status", "incorrect")
         }else {
             console.log("in")
         }
