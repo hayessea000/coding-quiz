@@ -4,7 +4,7 @@ var a1 = document.querySelector("#a1");
 var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
-
+var score= 0
 var question1 = {
     q:"which is a color?",
     answerLine1:{name: "blue", status:"correct"},
@@ -68,12 +68,14 @@ quizEvent.addEventListener("click", function(event) {
         var status = element.getAttribute("data-status")
         if (status==="correct"){
             console.log("cor")
+            score++
             element.setAttribute("data-status", "incorrect")
         }else {
             console.log("in")
         }
         if (questionCount== qs.length){
             console.log("done")
+            console.log("score:"+score)
         }else {
             runQuestions()
         }
