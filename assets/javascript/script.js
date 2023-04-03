@@ -36,6 +36,10 @@ quizEvent.addEventListener("click", function(event) {
         }else {
             console.log("in")
         }
-        runQuestions()
+        if (questionCount== qs.length){
+            console.log("done")
+        }else {
+            runQuestions()
+        }
     }
 })
