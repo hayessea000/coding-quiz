@@ -6,10 +6,18 @@ header{
     background-color: bisque;
     height: 250px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 header h1{
-    margin: auto;
+    margin-top: 40px;
+}
+
+#timer{
+    margin-top: 20px;
+    font-size: 20px;
 }
 
 .box{
