@@ -113,7 +113,7 @@ var hiScoreChanger= function(){
     var quizScreen = document.querySelector("#quizBlock");
     quizScreen.setAttribute("class", "hidden") ;  
     var hiScoreScreen = document.querySelector("#hiBlock"); 
-     hiScoreScreen.setAttribute("class", "box")
+    hiScoreScreen.setAttribute("class", "box")
 }
 
 var startUp =function(){
