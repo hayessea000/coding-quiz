@@ -28,7 +28,6 @@ header h1{
 section{
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     margin: 50px;
     border: 1px solid black;
     width: 600px;
@@ -51,4 +50,11 @@ section{
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
+}
+
+#start{
+    width: 200px;
+    height: 200px;
+    font-size: 30px;
+    margin: auto;
 }
