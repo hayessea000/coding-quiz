@@ -34,7 +34,7 @@ var question3 = {
 var qs =[question1,question2,question3] 
 var questionCount = 0
 var element
-
+var timer
 var runQuestions = function(){
     
     qHead.textContent= qs[questionCount].q;
@@ -60,18 +60,26 @@ var runQuestions = function(){
 
 var startTimer= function () {
     var timeLeft= 15;
-    var timer = setInterval(function() {
+    timer = setInterval(function() {
       timeLeft--;
       time.textContent = timeLeft + " seconds left to finish.";
   
       if(timeLeft === 0) {
         clearInterval(timer);
+        hiScore()
       }
   
     }, 1000);
 }
 
-
+var hiScore= function(){
+    qHead.textContent= "";
+    a1.textContent= "";
+    a2.textContent= "";
+    a3.textContent= "";
+    a4.textContent= "";
+    console.log("final")
+}
 
 
 
@@ -87,8 +95,11 @@ quizEvent.addEventListener("click", function(event) {
             console.log("in")
         }
         if (questionCount== qs.length){
-            console.log("done")
-            console.log("score:"+score)
+            console.log("done");
+            console.log("score:"+score);
+            clearInterval(timer);
+            hiScore()
+
         }else {
             runQuestions()
         }
