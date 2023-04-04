@@ -5,7 +5,6 @@ var a1 = document.querySelector("#a1");
 var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
-var time = document.querySelector("#timer");
 var score= 0
 var question1 = {
     q:"which is a color?",
@@ -61,13 +60,14 @@ var runQuestions = function(){
 var startTimer= function () {
     var timeLeft= 15;
     timer = setInterval(function() {
-      timeLeft--;
-      time.textContent = timeLeft + " seconds left to finish.";
-  
-      if(timeLeft === 0) {
-        clearInterval(timer);
-        hiScore()
-      }
+        timeLeft--;
+        var time = document.querySelector("#timer");
+        time.textContent = timeLeft + " seconds left to finish.";
+        
+        if(timeLeft === 0) {
+            clearInterval(timer);
+            hiScore()
+        }
   
     }, 1000);
 }
