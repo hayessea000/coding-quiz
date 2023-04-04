@@ -1,4 +1,5 @@
 var quizEvent = document.querySelector("article");
+var startBox = document.querySelector("#start");
 var qHead = document.querySelector("#question");
 var a1 = document.querySelector("#a1");
 var a2 = document.querySelector("#a2");
@@ -79,5 +80,8 @@ quizEvent.addEventListener("click", function(event) {
         }else {
             runQuestions()
         }
+    }if (element.matches("#start")){
+        startBox.textContent=""
+        runQuestions()
     }
 })
