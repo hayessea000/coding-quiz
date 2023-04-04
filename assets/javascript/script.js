@@ -79,6 +79,11 @@ var hiScore= function(){
     a3.textContent= "";
     a4.textContent= "";
     console.log("final")
+    var setName = prompt("Please enter your name");
+    var newScore = document.createElement("li");
+    newScore.textContent = score +" "+ setName;
+    var leaderboard = document.querySelector("#hiScore");
+    leaderboard.appendChild(newScore);
 }
 
 
