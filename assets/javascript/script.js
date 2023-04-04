@@ -5,6 +5,7 @@ var a1 = document.querySelector("#a1");
 var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
+var time = document.querySelector("#timer");
 var score= 0
 var question1 = {
     q:"which is a color?",
@@ -57,7 +58,18 @@ var runQuestions = function(){
     console.log(questionCount)
 }
 
-
+var startTimer= function () {
+    var timeLeft= 15;
+    var timer = setInterval(function() {
+      timeLeft--;
+      time.textContent = timeLeft + " seconds left to finish.";
+  
+      if(timeLeft === 0) {
+        clearInterval(timer);
+      }
+  
+    }, 1000);
+}
 
 
 
@@ -82,6 +94,7 @@ quizEvent.addEventListener("click", function(event) {
         }
     }if (element.matches("#start")){
         startBox.textContent=""
+        startTimer()
         runQuestions()
     }
 })
