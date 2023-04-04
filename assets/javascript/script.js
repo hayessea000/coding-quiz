@@ -1,121 +1,142 @@
-var quizEvent = document.querySelector("article");
+var quizEvent = document.querySelector("body");
 var startBox = document.querySelector("#start");
-var qHead = document.querySelector("#question");
-var a1 = document.querySelector("#a1");
-var a2 = document.querySelector("#a2");
-var a3 = document.querySelector("#a3");
-var a4 = document.querySelector("#a4");
+var questionHeader = document.querySelector("#question");
+var answer1 = document.querySelector("#a1");
+var answer2 = document.querySelector("#a2");
+var answer3 = document.querySelector("#a3");
+var answer4 = document.querySelector("#a4");
 var quizStatus= "start"
+var answerStatus
 var score= 0
+var element
+var timer
+var questionCount
 var question1 = {
     q:"which is a color?",
-    answerLine1:{name: "blue", status:"correct"},
-    answerLine2:{name: "a", status:"incorrect"},
-    answerLine3:{name: "3", status:"incorrect"},
-    answerLine4:{name: "apple", status:"incorrect"},
+    a1:{name: "blue", status:"correct"},
+    a2:{name: "a", status:"incorrect"},
+    a3:{name: "3", status:"incorrect"},
+    a4:{name: "apple", status:"incorrect"},
 }
 
 var question2 = {
     q:"which is a fruit?",
-    answerLine1:{name: "blue", status:"incorrect"},
-    answerLine2:{name: "a", status:"incorrect"},
-    answerLine3:{name: "3", status:"incorrect"},
-    answerLine4:{name: "apple", status:"correct"},
+    a1:{name: "blue", status:"incorrect"},
+    a2:{name: "a", status:"incorrect"},
+    a3:{name: "3", status:"incorrect"},
+    a4:{name: "apple", status:"correct"},
 }
 
 var question3 = {
     q:"which is a letter?",
-     answerLine1:{name: "blue", status:"incorrect"},
-      answerLine2:{name: "a", status:"correct"},
-      answerLine3:{name: "3", status:"incorrect"},
-       answerLine4:{name: "apple", status:"incorrect"},
+    a1:{name: "blue", status:"incorrect"},
+    a2:{name: "a", status:"correct"},
+    a3:{name: "3", status:"incorrect"},
+    a4:{name: "apple", status:"incorrect"},
 }
 
-var qs =[question1,question2,question3] 
-var questionCount = 0
-var element
-var timer
-var runQuestions = function(){
-    
-    qHead.textContent= qs[questionCount].q;
-    a1.textContent= qs[questionCount].answerLine1.name;
-    if(qs[questionCount].answerLine1.status == "correct"){
-        a1.setAttribute("data-status", "correct")
-    }
-    a2.textContent= qs[questionCount].answerLine2.name;
-    if(qs[questionCount].answerLine2.status == "correct"){
-        a2.setAttribute("data-status", "correct")
-    }
-    a3.textContent= qs[questionCount].answerLine3.name;
-    if(qs[questionCount].answerLine3.status == "correct"){
-        a3.setAttribute("data-status", "correct")
-    }
-    a4.textContent= qs[questionCount].answerLine4.name;
-    if(qs[questionCount].answerLine4.status == "correct"){
-        a4.setAttribute("data-status", "correct")
-    }
-    questionCount++
-    console.log(questionCount)
-}
+var questions =[question1,question2,question3] 
 
 var startTimer= function () {
     var timeLeft= 15;
     timer = setInterval(function() {
         timeLeft--;
-        var time = document.querySelector("#timer");
-        time.textContent = timeLeft + " seconds left to finish.";
-        
+        var timeEl = document.querySelector("#timer");
+        timeEl.textContent = timeLeft + " seconds left to finish.";
         if(timeLeft === 0) {
             clearInterval(timer);
-            hiScore()
+            hiScoreChanger()
         }
-  
     }, 1000);
 }
 
-var hiScore= function(){
-    qHead.textContent= "";
-    a1.textContent= "";
-    a2.textContent= "";
-    a3.textContent= "";
-    a4.textContent= "";
+var runQuestions = function(){
+    questionHeader.textContent= questions[questionCount].q;
+    answer1.textContent= questions[questionCount].a1.name;
+    if(questions[questionCount].a1.status == "correct"){
+        answer1.setAttribute("data-status", "correct")
+    }
+    answer2.textContent= questions[questionCount].a2.name;
+    if(questions[questionCount].a2.status == "correct"){
+        answer2.setAttribute("data-status", "correct")
+    }
+    answer3.textContent= questions[questionCount].a3.name;
+    if(questions[questionCount].a3.status == "correct"){
+        answer3.setAttribute("data-status", "correct")
+    }
+    answer4.textContent= questions[questionCount].a4.name;
+    if(questions[questionCount].a4.status == "correct"){
+        answer4.setAttribute("data-status", "correct")
+    }
+    questionCount++
+    console.log(questionCount)
+    
+}
+
+var checkAnswer= function(){
+    if (answerStatus==="correct"){
+        console.log("cor")
+        score++
+        element.setAttribute("data-status", "incorrect")
+    }else {
+        console.log("in")
+    }
+    if (questionCount!== questions.length){
+        runQuestions()
+    }else {
+        console.log("done");
+        console.log("score:"+score);
+        clearInterval(timer);
+        hiScoreChanger()
+    }
+}
+
+var hiScoreChanger= function(){
+    quizStatus= "hiScore"
+    questionHeader.textContent= "";
+    answer1.textContent= "";
+    answer2.textContent= "";
+    answer3.textContent= "";
+    answer4.textContent= "";
     console.log("final")
     var setName = prompt("Please enter your name");
     var newScore = document.createElement("li");
     newScore.textContent = score +" "+ setName;
     var leaderboard = document.querySelector("#hiScore");
     leaderboard.appendChild(newScore);
+
+
+
+
+
+
+    var quizScreen = document.querySelector("#quizBlock");
+    quizScreen.setAttribute("class", "hidden") ;  
+    var hiScoreScreen = document.querySelector("#hiBlock"); 
+     hiScoreScreen.setAttribute("class", "box")
 }
 
-
+var startUp =function(){
+    questionCount = 0
+    startTimer()
+    runQuestions()
+    
+}
 
 quizEvent.addEventListener("click", function(event) {
-    element = event.target;
-    if(quizStatus=="quiz"){
-        if (element.matches(".answer")) {
-            var status = element.getAttribute("data-status")
-            if (status==="correct"){
-                console.log("cor")
-                score++
-                element.setAttribute("data-status", "incorrect")
-            }else {
-                console.log("in")
-            }
-            if (questionCount== qs.length){
-                console.log("done");
-                console.log("score:"+score);
-                clearInterval(timer);
-                hiScore()
-            }else {
-                runQuestions()
-            }
-        }
-    }if(quizStatus=="start"){    
+    if(quizStatus=="start"){
+        element = event.target;    
         if (element.matches("#start")){
         startBox.remove()
         quizStatus= "quiz"
-        startTimer()
-        runQuestions()
+        startUp()
+        }
+    }if(quizStatus=="quiz"){
+        element = event.target;
+        if (element.matches(".answer")) {
+             answerStatus = element.getAttribute("data-status")
+             checkAnswer()
         }
     }
 })
+
