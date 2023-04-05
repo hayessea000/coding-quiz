@@ -7,7 +7,8 @@ var answer2 = document.querySelector("#a2");
 var answer3 = document.querySelector("#a3");
 var answer4 = document.querySelector("#a4");
 var quizScreen = document.querySelector("#quizBlock");
-var hiScoreScreen = document.querySelector("#hiBlock"); 
+var hiScoreScreen = document.querySelector("#hiBlock");
+var newScore = document.createElement("li");
 var quizStatus= "start"
 var answerStatus
 var score= 0
@@ -15,6 +16,7 @@ var element
 var timeLeft
 var timer
 var questionCount
+var saved
 var question1 = {
     q:"which is a color?",
     a1:{name: "blue", status:"correct"},
@@ -40,6 +42,16 @@ var question3 = {
 }
 
 var questions =[question1,question2,question3] 
+
+// var loadScore = function(){
+//     saved = JSON.parse(localStorage.getItem("hiScores"));
+//     console.log(saved)
+//     for( i = 0; i< saved.length; i++){
+//         newScore.textContent=saved[i]
+//         console.log(newScore.textContent)
+//         leaderboard.appendChild(newScore);
+//     }
+// }
 
 var startTimer= function () {
     timeLeft= 15;
@@ -73,13 +85,10 @@ var runQuestions = function(){
         answer4.setAttribute("data-status", "correct")
     }
     questionCount++
-    console.log(questionCount)
-    
 }
 
 var checkAnswer= function(){
     if (answerStatus==="correct"){
-        console.log("cor")
         score++
         element.setAttribute("data-status", "incorrect")
     }else {
@@ -88,8 +97,6 @@ var checkAnswer= function(){
     if (questionCount!== questions.length){
         runQuestions()
     }else {
-        console.log("done");
-        console.log("score:"+score);
         clearInterval(timer);
         hiScoreChanger()
     }
@@ -97,12 +104,24 @@ var checkAnswer= function(){
 
 var hiScoreChanger= function(){
     quizStatus= "hiScore";
-    var setName = prompt("Please enter your name");
-    var newScore = document.createElement("li");
-    newScore.textContent = setName +" "+ score;  
-    leaderboard.appendChild(newScore);
     quizScreen.setAttribute("class", "hidden") ;  
-    hiScoreScreen.setAttribute("class", "hiScore")
+    hiScoreScreen.setAttribute("class", "hiScore");
+    // loadScore()
+    saved = JSON.parse(localStorage.getItem("hiScores"));
+    console.log(saved)
+    for( i = 0; i< saved.length; i++){
+        newScore.textContent=saved[i]
+        console.log(newScore.textContent)
+        leaderboard.appendChild(newScore);
+    }
+    var setName = prompt("Please enter your name");
+    
+    var scoreName= setName +" "+ score
+    newScore.textContent = scoreName;  
+    leaderboard.appendChild(newScore);
+    saved.push(scoreName);
+    localStorage.setItem("hiScores", JSON.stringify(saved));
+    console.log(saved);
 }
 
 var startUp =function(){
@@ -124,8 +143,8 @@ quizEvent.addEventListener("click", function(event) {
     if(quizStatus=="start"){
         element = event.target;    
         if (element.matches("#start")){
-        startBox.remove()
-        startUp()
+            startBox.remove()
+            startUp()
         }
     }if(quizStatus=="quiz"){
         element = event.target;
@@ -139,6 +158,8 @@ quizEvent.addEventListener("click", function(event) {
              retake()
         }if (element.matches("#reset")) {
             leaderboard.parentNode.removeChild(leaderboard)
+            saved=[]
+            localStorage.setItem("hiScores", JSON.stringify(saved));
             console.log("clear")
        }
     }
