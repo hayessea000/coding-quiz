@@ -12,6 +12,7 @@ var quizStatus= "start"
 var answerStatus
 var score= 0
 var element
+var timeLeft
 var timer
 var questionCount
 var question1 = {
@@ -41,12 +42,12 @@ var question3 = {
 var questions =[question1,question2,question3] 
 
 var startTimer= function () {
-    var timeLeft= 15;
+    timeLeft= 15;
     timer = setInterval(function() {
         timeLeft--;
         var timeEl = document.querySelector("#timer");
         timeEl.textContent = timeLeft + " seconds left to finish.";
-        if(timeLeft === 0) {
+        if(timeLeft <= 0) {
             clearInterval(timer);
             hiScoreChanger()
         }
@@ -82,7 +83,7 @@ var checkAnswer= function(){
         score++
         element.setAttribute("data-status", "incorrect")
     }else {
-        console.log("in")
+        timeLeft= timeLeft-5
     }
     if (questionCount!== questions.length){
         runQuestions()
@@ -95,23 +96,11 @@ var checkAnswer= function(){
 }
 
 var hiScoreChanger= function(){
-    quizStatus= "hiScore"
-    questionHeader.textContent= "";
-    answer1.textContent= "";
-    answer2.textContent= "";
-    answer3.textContent= "";
-    answer4.textContent= "";
-    console.log("final")
+    quizStatus= "hiScore";
     var setName = prompt("Please enter your name");
     var newScore = document.createElement("li");
-    newScore.textContent = score +" "+ setName;  
+    newScore.textContent = setName +" "+ score;  
     leaderboard.appendChild(newScore);
-
-
-
-
-
-
     quizScreen.setAttribute("class", "hidden") ;  
     hiScoreScreen.setAttribute("class", "hiScore")
 }
@@ -130,6 +119,7 @@ var retake = function(){
     hiScoreScreen.setAttribute("class", "hidden");
     startUp()
 }
+
 quizEvent.addEventListener("click", function(event) {
     if(quizStatus=="start"){
         element = event.target;    
