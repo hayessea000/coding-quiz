@@ -62,3 +62,20 @@ section{
     font-size: 30px;
     margin: auto;
 }
+
+.hiScore{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.hiScore ol{
+    border: 1px solid black;
+    margin: 20px;
+}
+
+.hiScore ol li{
+    margin: 0px 5px 0px -20px;
+
+}

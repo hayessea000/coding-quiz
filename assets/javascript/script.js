@@ -1,10 +1,13 @@
 var quizEvent = document.querySelector("body");
 var startBox = document.querySelector("#start");
 var questionHeader = document.querySelector("#question");
+var leaderboard = document.querySelector("#hiScore");
 var answer1 = document.querySelector("#a1");
 var answer2 = document.querySelector("#a2");
 var answer3 = document.querySelector("#a3");
 var answer4 = document.querySelector("#a4");
+var quizScreen = document.querySelector("#quizBlock");
+var hiScoreScreen = document.querySelector("#hiBlock"); 
 var quizStatus= "start"
 var answerStatus
 var score= 0
@@ -101,8 +104,7 @@ var hiScoreChanger= function(){
     console.log("final")
     var setName = prompt("Please enter your name");
     var newScore = document.createElement("li");
-    newScore.textContent = score +" "+ setName;
-    var leaderboard = document.querySelector("#hiScore");
+    newScore.textContent = score +" "+ setName;  
     leaderboard.appendChild(newScore);
 
 
@@ -110,25 +112,29 @@ var hiScoreChanger= function(){
 
 
 
-    var quizScreen = document.querySelector("#quizBlock");
     quizScreen.setAttribute("class", "hidden") ;  
-    var hiScoreScreen = document.querySelector("#hiBlock"); 
-    hiScoreScreen.setAttribute("class", "box")
+    hiScoreScreen.setAttribute("class", "hiScore")
 }
 
 var startUp =function(){
     questionCount = 0
+    score = 0
+    quizStatus= "quiz"
     startTimer()
     runQuestions()
     
 }
 
+var retake = function(){
+    quizScreen.setAttribute("class", "box") ;   
+    hiScoreScreen.setAttribute("class", "hidden");
+    startUp()
+}
 quizEvent.addEventListener("click", function(event) {
     if(quizStatus=="start"){
         element = event.target;    
         if (element.matches("#start")){
         startBox.remove()
-        quizStatus= "quiz"
         startUp()
         }
     }if(quizStatus=="quiz"){
@@ -137,6 +143,14 @@ quizEvent.addEventListener("click", function(event) {
              answerStatus = element.getAttribute("data-status")
              checkAnswer()
         }
+    }if(quizStatus=="hiScore"){
+        element = event.target;
+        if (element.matches("#retake")) {
+             retake()
+        }if (element.matches("#reset")) {
+            leaderboard.parentNode.removeChild(leaderboard)
+            console.log("clear")
+       }
     }
 })
 
