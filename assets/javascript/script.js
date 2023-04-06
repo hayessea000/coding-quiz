@@ -8,7 +8,7 @@ var answer3 = document.querySelector("#a3");
 var answer4 = document.querySelector("#a4");
 var quizScreen = document.querySelector("#quizBlock");
 var hiScoreScreen = document.querySelector("#hiBlock");
-var newScore = document.createElement("li");
+
 var quizStatus= "start"
 var answerStatus
 var score= 0
@@ -43,15 +43,19 @@ var question3 = {
 
 var questions =[question1,question2,question3] 
 
-// var loadScore = function(){
-//     saved = JSON.parse(localStorage.getItem("hiScores"));
-//     console.log(saved)
-//     for( i = 0; i< saved.length; i++){
-//         newScore.textContent=saved[i]
-//         console.log(newScore.textContent)
-//         leaderboard.appendChild(newScore);
-//     }
-// }
+var loadScore = function(){
+    saved = JSON.parse(localStorage.getItem("hiScores"));
+    console.log(saved)
+    if(saved!== null){
+    for(let i = 0; i< saved.length; i++){
+        let myscore= document.createElement("li")
+        myscore.textContent=saved[i]
+        console.log(myscore)
+        leaderboard.appendChild(myscore);
+    }}else{
+        saved=[]
+    }
+}
 
 var startTimer= function () {
     timeLeft= 15;
@@ -106,16 +110,9 @@ var hiScoreChanger= function(){
     quizStatus= "hiScore";
     quizScreen.setAttribute("class", "hidden") ;  
     hiScoreScreen.setAttribute("class", "hiScore");
-    // loadScore()
-    saved = JSON.parse(localStorage.getItem("hiScores"));
-    console.log(saved)
-    for( i = 0; i< saved.length; i++){
-        newScore.textContent=saved[i]
-        console.log(newScore.textContent)
-        leaderboard.appendChild(newScore);
-    }
-    var setName = prompt("Please enter your name");
     
+    var setName = prompt("Please enter your name");
+    var newScore = document.createElement("li");
     var scoreName= setName +" "+ score
     newScore.textContent = scoreName;  
     leaderboard.appendChild(newScore);
@@ -144,6 +141,7 @@ quizEvent.addEventListener("click", function(event) {
         element = event.target;    
         if (element.matches("#start")){
             startBox.remove()
+            loadScore()
             startUp()
         }
     }if(quizStatus=="quiz"){
@@ -157,10 +155,13 @@ quizEvent.addEventListener("click", function(event) {
         if (element.matches("#retake")) {
              retake()
         }if (element.matches("#reset")) {
-            leaderboard.parentNode.removeChild(leaderboard)
-            saved=[]
+            var tester =document.querySelector("li")
+            leaderboard.removeChild(tester)
+            
+            console.log(saved)
+            var removed= saved.shift()
             localStorage.setItem("hiScores", JSON.stringify(saved));
-            console.log("clear")
+            console.log(saved)
        }
     }
 })
