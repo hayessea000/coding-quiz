@@ -44,12 +44,10 @@ var questions =[question1,question2,question3]
 
 var loadScore = function(){
     saved = JSON.parse(localStorage.getItem("hiScores"));
-    console.log(saved)
     if(saved!== null){
         for(let i = 0; i< saved.length; i++){
             let myscore= document.createElement("li")
             myscore.textContent=saved[i]
-            console.log(myscore)
             leaderboard.appendChild(myscore);
     }}else{
         saved=[]
