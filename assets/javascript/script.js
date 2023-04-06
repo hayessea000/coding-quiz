@@ -8,7 +8,6 @@ var answer3 = document.querySelector("#a3");
 var answer4 = document.querySelector("#a4");
 var quizScreen = document.querySelector("#quizBlock");
 var hiScoreScreen = document.querySelector("#hiBlock");
-
 var quizStatus= "start"
 var answerStatus
 var score= 0
@@ -47,11 +46,11 @@ var loadScore = function(){
     saved = JSON.parse(localStorage.getItem("hiScores"));
     console.log(saved)
     if(saved!== null){
-    for(let i = 0; i< saved.length; i++){
-        let myscore= document.createElement("li")
-        myscore.textContent=saved[i]
-        console.log(myscore)
-        leaderboard.appendChild(myscore);
+        for(let i = 0; i< saved.length; i++){
+            let myscore= document.createElement("li")
+            myscore.textContent=saved[i]
+            console.log(myscore)
+            leaderboard.appendChild(myscore);
     }}else{
         saved=[]
     }
@@ -110,7 +109,6 @@ var hiScoreChanger= function(){
     quizStatus= "hiScore";
     quizScreen.setAttribute("class", "hidden") ;  
     hiScoreScreen.setAttribute("class", "hiScore");
-    
     var setName = prompt("Please enter your name");
     var newScore = document.createElement("li");
     var scoreName= setName +" "+ score
@@ -118,7 +116,6 @@ var hiScoreChanger= function(){
     leaderboard.appendChild(newScore);
     saved.push(scoreName);
     localStorage.setItem("hiScores", JSON.stringify(saved));
-    console.log(saved);
 }
 
 var startUp =function(){
@@ -155,13 +152,12 @@ quizEvent.addEventListener("click", function(event) {
         if (element.matches("#retake")) {
              retake()
         }if (element.matches("#reset")) {
-            var tester =document.querySelector("li")
-            leaderboard.removeChild(tester)
-            
-            console.log(saved)
+            if (saved.length!==0){
+                var tester =document.querySelector("li")
+                leaderboard.removeChild(tester)
+            }
             saved.shift()
             localStorage.setItem("hiScores", JSON.stringify(saved));
-            console.log(saved)
        }
     }
 })
