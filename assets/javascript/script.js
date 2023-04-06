@@ -159,7 +159,7 @@ quizEvent.addEventListener("click", function(event) {
             leaderboard.removeChild(tester)
             
             console.log(saved)
-            var removed= saved.shift()
+            saved.shift()
             localStorage.setItem("hiScores", JSON.stringify(saved));
             console.log(saved)
        }
