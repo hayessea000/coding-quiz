@@ -17,33 +17,49 @@ var timer;
 var questionCount;
 var saved;
 var question1 = {
-    q:"which is a color?",
-    a1:{name: "blue", status:"correct"},
-    a2:{name: "a", status:"incorrect"},
-    a3:{name: "3", status:"incorrect"},
-    a4:{name: "apple", status:"incorrect"},
+    q:"Which Is A Color?",
+    a1:{name: "Blue", status:"correct"},
+    a2:{name: "Three", status:"incorrect"},
+    a3:{name: "Rock", status:"incorrect"},
+    a4:{name: "Apple", status:"incorrect"},
 }
 
 var question2 = {
-    q:"which is a fruit?",
-    a1:{name: "blue", status:"incorrect"},
-    a2:{name: "a", status:"incorrect"},
-    a3:{name: "3", status:"incorrect"},
-    a4:{name: "apple", status:"correct"},
+    q:"Which Is A Fruit?",
+    a1:{name: "Cow", status:"incorrect"},
+    a2:{name: "Rope", status:"incorrect"},
+    a3:{name: "Blue", status:"incorrect"},
+    a4:{name: "Apple", status:"correct"},
 }
 
 var question3 = {
-    q:"which is a letter?",
-    a1:{name: "blue", status:"incorrect"},
-    a2:{name: "a", status:"correct"},
-    a3:{name: "3", status:"incorrect"},
-    a4:{name: "apple", status:"incorrect"},
+    q:"Which Is A Number?",
+    a1:{name: "Dog", status:"incorrect"},
+    a2:{name: "Grape", status:"incorrect"},
+    a3:{name: "Three", status:"correct"},
+    a4:{name: "Apple", status:"incorrect"},
 }
 
-var questions =[question1,question2,question3]; 
+var question4 = {
+    q:"How Many Inches In A Foot?",
+    a1:{name: "5", status:"incorrect"},
+    a2:{name: "12", status:"correct"},
+    a3:{name: "15", status:"incorrect"},
+    a4:{name: "7", status:"incorrect"},
+}
+
+var question5 = {
+    q:"Whitch Is An Animal?",
+    a1:{name: "Wolf", status:"correct"},
+    a2:{name: "Lake", status:"incorrect"},
+    a3:{name: "House", status:"incorrect"},
+    a4:{name: "Car", status:"incorrect"},
+}
+
+var questions =[question1,question2,question3,question4,question5]; 
 
 var startTimer= function () {
-    timeLeft= 15;
+    timeLeft= 30;
     timer = setInterval(function() {
         timeLeft--;
         var timeEl = document.querySelector("#timer");
@@ -78,7 +94,7 @@ var runQuestions = function(){
 
 var checkAnswer= function(){
     if (answerStatus==="correct"){
-        score++;
+        score= score+5;
         element.setAttribute("data-status", "incorrect");
     }else {
         timeLeft= timeLeft-5;
