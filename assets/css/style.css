@@ -53,9 +53,20 @@ section{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-items: center;
     height: 100%;
 }
 
+.quizBox h3{
+    font-size: 40px;
+}
+
+.quizBox p{
+    padding-left: 50px;
+    background-color: rgb(119, 211, 227);
+    width: 100px;
+    font-size: 25px;
+}
 #start{
     width: 200px;
     height: 200px;
@@ -63,6 +74,9 @@ section{
     margin: auto;
 }
 
+h4{
+    font-size: 50px;
+}
 .hiScore{
     display: flex;
     flex-direction: column;
@@ -71,12 +85,13 @@ section{
 }
 
 .hiScore ul{
-    border: 1px solid black;
     margin-top: 20px;
 }
 
 .hiScore ul li{
     margin: 0px 5px 0px -20px;
+    font-size: 30px;
+    border-bottom: 1px solid black;
 }
 
 footer div{

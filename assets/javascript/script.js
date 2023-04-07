@@ -96,8 +96,8 @@ function displaySavedScores(){
     quizStatus= "hiScore";
     quizScreen.setAttribute("class", "hidden") ;  
     hiScoreScreen.setAttribute("class", "hiScore");
-    var setName = prompt("Please enter your name");
-    var scoreName= setName +" "+ score;
+    var setName = prompt("Please Enter Your Initials");
+    var scoreName= score +"point/s Set By "+ setName;
     saved = JSON.parse(localStorage.getItem("hiScores"));
     if(saved== null){
         saved=[];
